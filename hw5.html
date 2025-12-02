@@ -1,0 +1,88 @@
+
+<html>
+<body>
+<script>
+    //1
+    // class Marker {
+    //     constructor(color, amount) {
+    //         this.color = color;
+    //         this.amount = amount;
+    //     }
+    //       print(text) {
+    //         var arrayOfText = text.split('');
+    //         let result = "";
+            
+    //         for (let i = 0; i < arrayOfText.length; i++) 
+    //         {
+    //             if (this.amount <= 0) break;
+                
+    //             let symbol = arrayOfText[i];
+    //             if (symbol !== " ") {
+    //                 this.amount -= 0.5;
+    //             }
+                
+    //             result += symbol;
+    //         }
+    //         const p = document.createElement("p");
+    //         p.style.color = this.color;
+    //         p.textContent = result;
+    //         document.body.appendChild(p);
+    //     }
+    // }
+    
+    // class MarkerFill extends Marker {
+    //     constructor(color, amount) {
+    //         super(color, amount);
+    //     }
+        
+    //     refill(addAmount) {
+    //         amount += addAmount;
+    //         if (this.amount > 100) this.amount = 100;
+    //     }
+    // }
+    
+    // const marker = new Marker("red", 3);
+    // marker.print("Hello world");
+
+    // 2
+    
+    class ExtendedDate extends Date {
+        constructor(...args) {
+            super(...args); 
+        }
+    
+        printTextDate() {
+            const months = [
+                "січня", "лютого", "березня", "квітня", "травня", "червня",
+                "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"
+            ];
+    
+            return `${this.getDate()} ${months[this.getMonth()]}`;
+        }
+    
+        isFutureOrPast() {
+            const now = new Date();
+            return this.getTime() >= now.getTime();
+        }
+    
+        isLeapYear() {
+            const y = this.getFullYear();
+            return (y % 4 === 0 && y % 100 !== 0) || (y % 400 === 0);
+        }
+    
+        nextDate() {
+            const next = new ExtendedDate(this);
+            next.setDate(this.getDate() + 1);
+            return next;
+        }
+    }
+    
+    const d = new ExtendedDate(2025, 9, 6);
+    
+    document.body.innerHTML += "Дата текстом: " + d.printTextDate() + "<br>";
+    document.body.innerHTML += "Майбутня дата? " + d.isFutureOrPast() + "<br>";
+    document.body.innerHTML += "Високосний рік? " + d.isLeapYear() + "<br>";
+    document.body.innerHTML += "Наступна дата: " + d.nextDate().toDateString() + "<br>";
+</script>
+</body>
+</html>
